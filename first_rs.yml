@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myrs1
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+      - {key: tier, operator: In, values: [front]}
+    matchLabels:
+      team: prod
+  template:
+    metadata:
+      labels:
+        team: prod
+        tier: front
+    spec:
+        containers:
+        - name: "c1"
+          image: "vimal13/apache-webserver-php"
+
